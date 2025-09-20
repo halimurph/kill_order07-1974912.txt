@@ -2,13 +2,15 @@ const textElement = document.getElementById('text');
 const cursor = document.getElementById('cursor');
 
 const hackerText = `
-Initializing system...
-Access granted.
-Loading files...
-> Welcome, Agent Corbeau.
-> All systems online.
-> Running diagnostics...
-> Initiating protocol X...
+Congratulations, Subject zero-seven.
+Memory recovery complete.
+You acted according to protocol.
+All actions verified… Phase Two concluded.
+Subject designation: zero-seven. Identity restored. 
+
+TARGET: ALDRIDGE, PRESTON
+STATUS: TERMINATED
+AUTHORIZED BY: SUBJECT 07 (YOU)
 `;
 
 let i = 0;
@@ -17,8 +19,7 @@ function type() {
   if (i < hackerText.length) {
     textElement.innerHTML += hackerText.charAt(i);
     i++;
-    // Randomize typing speed slightly for realism
-    const randomDelay = Math.random() * 100 + 20;
+    const randomDelay = Math.random() * 100 + 20; // random typing speed
     setTimeout(type, randomDelay);
   } else {
     cursor.style.display = 'none'; // hide cursor at the end
