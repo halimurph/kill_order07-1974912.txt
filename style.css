@@ -1,25 +1,54 @@
-body {
-  background-color: black;
-  color: #00ff00;
-  font-family: 'Courier New', Courier, monospace;
+/* full-screen terminal */
+html, body {
+  height: 100%;
   margin: 0;
-  padding: 20px;
-  height: 100vh;
-  overflow: hidden;
 }
 
+body {
+  background: #000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 28px;
+  box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace; /* <-- Courier New */
+  color: #00ff00;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* terminal container uses inline layout so cursor sits directly in front of text */
 #terminal {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px; /* little space between cursor and first char */
   white-space: pre-wrap;
-  line-height: 1.3em;
+  line-height: 1.35;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
+/* flashing block cursor (keeps flashing while typing) */
 #cursor {
   display: inline-block;
-  width: 10px;
-  animation: blink 1s infinite;
+  font-weight: 700;
+  animation: blink 700ms steps(1) infinite;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: top;
 }
 
+/* blinking keyframes */
 @keyframes blink {
-  0%, 50%, 100% { opacity: 1; }
-  25%, 75% { opacity: 0; }
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* pre styling to look terminal-y */
+#text {
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  color: inherit;
+  white-space: pre-wrap;
+  font-size: 18px;
 }
