@@ -1,8 +1,6 @@
-const textElement = document.getElementById('text');
-const cursor = document.getElementById('cursor');
+const textEl = document.getElementById('text');
 
-const hackerText = `
-Congratulations, Subject zero-seven.
+const hackerText = `Congratulations, Subject zero-seven.
 Memory recovery complete.
 You acted according to protocol.
 All actions verified… Phase Two concluded.
@@ -13,17 +11,34 @@ STATUS: TERMINATED
 AUTHORIZED BY: SUBJECT 07 (YOU)
 `;
 
+// index
 let i = 0;
 
-function type() {
+function typeChar() {
   if (i < hackerText.length) {
-    textElement.innerHTML += hackerText.charAt(i);
+    // append character
+    textEl.textContent += hackerText.charAt(i);
     i++;
-    const randomDelay = Math.random() * 100 + 20; // random typing speed
-    setTimeout(type, randomDelay);
+
+    // smaller pause on spaces/newlines to look natural
+    const ch = hackerText.charAt(i - 1);
+    let base = 40; // base speed
+    if (ch === '\n') base = 120;
+    if (ch === ' ' ) base = 20;
+
+    // randomize a bit for realism
+    const delay = base + Math.random() * 120;
+    setTimeout(typeChar, delay);
   } else {
-    cursor.style.display = 'none'; // hide cursor at the end
+    // finished typing — leave cursor flashing in front (per your request)
+    // if you'd rather move the cursor to the end, we could do that here.
   }
 }
 
-window.onload = type;
+// start after load
+window.addEventListener('load', () => {
+  // clear any existing text (safety)
+  textEl.textContent = '';
+  i = 0;
+  setTimeout(typeChar, 300); // small initial pause
+});
